@@ -5,7 +5,7 @@ const addTwo = numArr.map((num, index, arr) => {
     return num + 2
 }) 
 
-console.table(addTwo)
+console.log(addTwo)
 
 /*==============================================
                 Polyfill of map()
@@ -35,4 +35,4 @@ let addOne = myArr.myMap(num => {
 })
 
 console.log('Polyfill of Map')
-console.table(addOne)
+console.log(addOne)

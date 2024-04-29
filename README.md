@@ -1,12 +1,13 @@
 # JavaScript Interview Series
 ---
 ## Topics
-[1 var, Let, and const](#var-let-const)
-[2 map, filter and reduce](#map-filter-reduce)
+[1. var, Let, and const](#var-let-const)
+
+[2. map, filter and reduce](#map-filter-reduce)
 
 
 ---
-## Var, Let, and, Const
+## var let  const
 [Go to Top](#topics)
 
 ### (1.1) What is Scope?
@@ -103,7 +104,8 @@ NOTE: const and let are not hoisted in temporal dead zone not like var. so, we c
 - For every new functions, JS creates a new execution context.
 
 ---
-## 2 map, filter, and reduce
+## map filter reduce
+[Go to Top](#topics)
 
 ### map()
 - to create a new array from an existing array by applying a function to each one of the elements in the existing array.
@@ -115,19 +117,12 @@ const addTwo = numArr.map((num, index, arr) => {
     return num + 2
 }) 
 
-console.table(addTwo)
+console.log(addTwo)
 ```
 
 output
 ```
-┌─────────┬────────┐
-│ (index) │ Values │
-├─────────┼────────┤
-│ 0       │ 3      │
-│ 1       │ 4      │
-│ 2       │ 5      │
-│ 3       │ 6      │
-└─────────┴────────┘
+[ 3, 4, 5, 6 ]
 ```
 
 ### filter()
@@ -199,17 +194,12 @@ let addOne = myArr.myMap(num => {
 })
 
 console.log('Polyfill of Map')
-console.table(addOne)
+console.log(addOne)
 ```
 
 Output:
 ```
 Polyfill of Map
-┌─────────┬────────┐
-│ (index) │ Values │
-├─────────┼────────┤
-│ 0       │ 2      │
-│ 1       │ 5      │
-│ 2       │ 6      │
-└─────────┴────────┘
+[ 2, 5, 6 ]
+
 ```
