@@ -1,8 +1,8 @@
 # JavaScript Interview Series
 ---
 ## Topics
-[1 Var, Let, and Const](#var-let-const)
-
+[1 var, Let, and const](#var-let-const)
+[2 map, filter and reduce](#map-filter-reduce)
 
 
 ---
@@ -101,3 +101,115 @@ NOTE: const and let are not hoisted in temporal dead zone not like var. so, we c
 #### Execution Phase
 - The code is executed line by line from assigning values to calling functions.
 - For every new functions, JS creates a new execution context.
+
+---
+## 2 map, filter, and reduce
+
+### map()
+- to create a new array from an existing array by applying a function to each one of the elements in the existing array.
+
+```javaScript
+const numArr = [1,2,3,4]
+
+const addTwo = numArr.map((num, index, arr) => {
+    return num + 2
+}) 
+
+console.table(addTwo)
+```
+
+output
+```
+┌─────────┬────────┐
+│ (index) │ Values │
+├─────────┼────────┤
+│ 0       │ 3      │
+│ 1       │ 4      │
+│ 2       │ 5      │
+│ 3       │ 6      │
+└─────────┴────────┘
+```
+
+### filter()
+- It takes each element from an array, applies condition on it, and return the element if the condition is true.
+- It returns an array of filtered elements only which satisfies the condition.
+
+```javaScript
+const numArr2 = [4, 17, 18, 13]
+
+const divByTwo = numArr2.filter(num => {
+    return num % 2 === 0
+})
+
+console.log(divByTwo)
+```
+
+Output:
+```
+[ 4, 18 ]
+```
+
+### reduce()
+- It reduces the array into a single value.
+- It takes a callback function and an initial value.
+- If there is no any initial value, it takes the first element of array.
+
+```javascript
+const sum = numArr3.reduce((accumulator, current, index, array) => {}, 0)
+```
+
+```javaScript
+const numArr3 = [1,2,3,4]
+
+const sum = numArr3.reduce((acc, curr) => {
+    return acc + curr
+}, 0)
+
+console.log(sum)
+```
+
+Output:
+```
+10
+```
+
+## Polyfills of map, filter, and reduce
+
+### Polyfill of map()
+- Here, prototype is used to add method 'myMap' to the Array object.
+- 'this' refers to the array that will be used with the map function.
+
+```javaScript
+Array.prototype.myMap = function(callBackFunc) {
+    let newArr = []
+    for(let i = 0; i < this.length; i++) {
+        newArr.push(callBackFunc(this[i], i, this))
+    }
+
+    return newArr
+}
+```
+- Using the above myMap function.
+
+```javaScript
+let myArr = [1,4,5]
+
+let addOne = myArr.myMap(num => {
+    return num + 1
+})
+
+console.log('Polyfill of Map')
+console.table(addOne)
+```
+
+Output:
+```
+Polyfill of Map
+┌─────────┬────────┐
+│ (index) │ Values │
+├─────────┼────────┤
+│ 0       │ 2      │
+│ 1       │ 5      │
+│ 2       │ 6      │
+└─────────┴────────┘
+```
