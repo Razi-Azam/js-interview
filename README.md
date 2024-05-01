@@ -9,6 +9,10 @@
 
 [3. map vs forEach](#map-vs-foreach)
 
+[4. Output Based Questions Set 1](#output-based-questions-set-1)
+
+[5. Functions - Hoisting, Scope, Callback, Arrow Functions](#functions---hoisting-scope-callback-arrow-functions)
+
 ---
 ## var let  const
 [Go to Top](#topics)
@@ -107,6 +111,7 @@ NOTE: const and let are not hoisted in temporal dead zone not like var. so, we c
 - For every new functions, JS creates a new execution context.
 
 ---
+
 ## map filter reduce
 [Go to Top](#topics)
 
@@ -170,6 +175,8 @@ Output:
 ```
 10
 ```
+
+---
 
 ## Polyfills of map, filter, and reduce
 [Go to Top](#topics)
@@ -281,6 +288,8 @@ Output
 10
 ```
 
+---
+
 ## map vs forEach
 [Go to Top](#topics)
 
@@ -288,7 +297,7 @@ Output
 | ------------- | ------------- |
 | It returns a new array  | it doesn't return anything but 'undefined' |
 | It doesn't modify the original array  | It does  |
-| Method chaining can be performed. For example, arr.map().filter() | The method chaining technique cannot be performed because it doen't return anything |
+| Method chaining can be performed. For example, arr.filter().map() | The method chaining technique cannot be performed because it doen't return anything |
 
 ### Code Example
 ```javaScript
@@ -337,5 +346,41 @@ original Array is modified by forEach
 
 ```
 
-## 
+---
+
+## Output Based Questions Set 1
+[Go to Top](#topics)
+
+
+```javaScript
+let studentData = [
+    {name: "Razi", studId: 101, score: 92 },
+    {name: "Vikas", studId: 102, score: 60 },
+    {name: "Arfeen", studId: 103, score: 70 },
+    {name: "Shakir", studId: 104, score: 40 },
+]
+```
+### Question 1
+- Return only name of the students in Capitalized.
+
+### Question 2
+- Return only details of those students who scored more than 60.
+
+### Question 3
+- Calculate the sum of scores of all the students.
+
+### Question 4
+- Return only names of the students who scored more than 60
+
+### Question 5
+- Return total score for studemts with scores greater than 60 after 20 marks have been added tothose who scored less than 60.
+- in the above question, first add the additional score to those students who scored less than 60.
+- Then, filter the students who scored more than 60 now.
+- Lastly, calculate the sum of the scores of students.
+
+### ✅ 🤔 For Solution, please check the code file named "qna-1.js" in the repo.
+
+---
+
+## Functions - Hoisting, Scope, Callback, Arrow Functions
 [Go to Top](#topics)
