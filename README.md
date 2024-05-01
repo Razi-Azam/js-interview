@@ -5,6 +5,9 @@
 
 [2. map, filter and reduce](#map-filter-reduce)
 
+[3. Polyfills of map, filter, and reduce](#polyfills-of-map-filter-and-reduce)
+
+[3. map vs forEach](#map-vs-foreach)
 
 ---
 ## var let  const
@@ -169,6 +172,7 @@ Output:
 ```
 
 ## Polyfills of map, filter, and reduce
+[Go to Top](#topics)
 
 ### Polyfill of map()
 - Here, prototype is used to add method 'myMap' to the Array object.
@@ -236,3 +240,102 @@ Output
 ```
 [ 4, 18 ]
 ```
+
+
+### Polyfill of reduce()
+- It is different from map and filter as it takes a callback function and an initial value.
+- Assign an initial value to the accumulator variable.
+- If the initial value is not provided then assign the first element of an array as its initial value.
+
+
+```javaScript
+Array.prototype.myReduce = 
+    function (callbackFunc, initialValue) {
+    var accumulator = initialValue
+
+    for(let i = 0; i < this.length; i++) {
+        accumulator = accumulator 
+            ? callbackFunc(accumulator, this[i], i, this)
+            : this[i]
+    }
+
+    return accumulator;
+}
+
+```
+
+- Using the above myReduce function.
+
+```javaScript
+const numArr4 = [1,2,3,4]
+
+const sum2 = numArr4.myReduce((acc, curr) => {
+    return acc + curr
+}, 0)
+
+console.log(sum2)
+```
+
+Output
+```
+10
+```
+
+## map vs forEach
+[Go to Top](#topics)
+
+|     map       |    forEach    |
+| ------------- | ------------- |
+| It returns a new array  | it doesn't return anything but 'undefined' |
+| It doesn't modify the original array  | It does  |
+| Method chaining can be performed. For example, arr.map().filter() | The method chaining technique cannot be performed because it doen't return anything |
+
+### Code Example
+```javaScript
+const numArr = [4, 2, 0, 3, 1]
+
+//map()
+const mapOutput = numArr.map(numArrElm => {
+    return numArrElm * 3
+})
+
+console.log('Map Output')
+console.log(mapOutput)
+
+console.log('original Array is Unchanged')
+console.log(numArr)
+
+//forEach
+const forEachOutput = numArr.forEach((numArrElm, index) => {
+    return numArrElm * 3
+})
+
+console.log('forEach Output')
+console.log(forEachOutput)
+
+const forEachOutput2 = numArr.forEach((numArrElm, index) => {
+    numArr[index] = numArrElm * 3
+})
+
+console.log('original Array is modified by forEach')
+console.log(numArr)
+```
+
+### output
+```css
+Map Output
+[ 12, 6, 0, 9, 3 ]
+
+original Array is Unchanged
+[ 4, 2, 0, 3, 1 ]
+
+forEach Output
+undefined
+
+original Array is modified by forEach
+[ 12, 6, 0, 9, 3 ]
+
+```
+
+## 
+[Go to Top](#topics)
