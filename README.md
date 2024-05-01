@@ -203,3 +203,36 @@ Polyfill of Map
 [ 2, 5, 6 ]
 
 ```
+
+### Polyfill of filter()
+- Same as the map function but here, we'll check the condition before pushing the element into the new array.
+
+```javaScript
+Array.prototype.myFilter = function(callBackFunc) {
+    let newArr = []
+    for(let i = 0; i < this.length; i++) {
+        if(callBackFunc(this[i], i, this) === true)
+        newArr.push(this[i])
+    }
+
+    return newArr
+}
+```
+
+- Using the above myFilter function.
+
+```javaScript
+let myArr =  [4, 17, 18, 13]
+
+let addOne = myArr.myFilter(num => {
+    return num % 2 === 0
+})
+
+console.log('Polyfill of Map')
+console.log(addOne)
+```
+
+Output
+```
+[ 4, 18 ]
+```
