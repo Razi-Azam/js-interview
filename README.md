@@ -384,3 +384,49 @@ let studentData = [
 
 ## Functions - Hoisting, Scope, Callback, Arrow Functions
 [Go to Top](#topics)
+
+### Function Declaration/Defintion
+```javaScript
+function greet(name) {
+    return `Hi ${name}`
+}
+```
+
+### Function Expression
+- The second part (after =) is called anonymous function.
+
+```javaScript
+const greet = function (name) {
+    return `Hi ${name}`
+}
+```
+
+### First Class Function
+- Since in JS, a function is treated like a variable which can be assigned to a variable, passed as an argument to a function or return from a function. 
+
+```javaScript
+function getName(name) {
+    return name
+}
+
+function greetUser(func) {
+    console.log("Hi " + func)
+}
+
+greetUser(getName('Razi'))
+```
+
+Output:
+```
+Hi Razi
+```
+
+### IIFE
+- Immediately invoked function expression.
+- It is a kind of function that is called immediately after declaration.
+
+```javaScript
+(function add(num1, num2) {
+    console.log(num1 + num2);
+})(5, 2)
+```
