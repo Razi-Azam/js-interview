@@ -65,3 +65,35 @@ var numArr = [4, 3]
 
 //here, speard operator is used to spread the numArr values
 multiply(...numArr)
+
+/* ====================================================
+    Callback Function
+======================================================*/
+function greet(userName) {
+    console.log('Hi ' + userName)
+}
+
+//greet is passed as callback function
+function getUserName(callback) {
+    var userName = "Razi"
+    callback(userName)
+}
+
+getUserName(greet)
+
+/* ====================================================
+    Arrow Function
+======================================================*/
+let user = {
+    userFirstName: "Razi",
+    userLastName: "Azam",
+    showUser1: () => {
+        console.log("This is " + this.userFirstName)
+    },
+    showUser2: function() {
+        console.log("This is " + this.userFirstName)
+    }
+}
+
+user.showUser1()
+user.showUser2()

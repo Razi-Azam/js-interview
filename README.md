@@ -563,6 +563,102 @@ Output
 undefined
 ```
 
+### Callback Function
+- It is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of action or routine.
+- Usage: Callback functions are commonly used with asynchronous operations like fetching data from a server, handling events, or executing code after a timer has elapsed.
+- Examples, forEach, map, filter, reduce, setTimeout, setInterval, addEventListener are just a few examples of built-in functions in JavaScript that accept callback functions. 
+
+```javascript
+setTimeout(function() {
+    console.log('Delayed execution');
+}, 1000); // Logs 'Delayed execution' after 1 second
+
+
+document.addEventListener('click', function() {
+    console.log('Document clicked');
+});
+```
+
+### A simple callback function example
+```javascript
+function greet(userName) {
+    console.log('Hi ' + userName)
+}
+
+//greet is passed as callback function
+function getUserName(callback) {
+    var userName = "Razi"
+    callback(userName)
+}
+
+getUserName(greet)
+```
+
+Output:
+```
+Hi Razi
+```
+
+
+### Arrow Functions
+- Arrow functions are a concise way to write function expressions in JavaScript.
+- They were introduced in ECMAScript 6 (ES6).
+
+```javascript
+const add = (a, b) => a + b;
+console.log(add(3, 5)); // Output: 8
+```
+
+- Arrow functions do not have their own this context. Instead, they inherit the this value from the surrounding lexical context (i.e., the context in which they are defined).
+```javascript
+let user = {
+    userFirstName: "Razi",
+    userLastName: "Azam",
+    showUser1: () => {
+        console.log("This is " + this.userFirstName)
+    },
+    showUser2: function() {
+        console.log("This is " + this.userFirstName)
+    }
+}
+
+user.showUser1() //arrow function call
+user.showUser2() //bormal function call
+```
+
+Output:
+```
+This is undefined
+This is Razi
+```
+
+- Cannot be used as constructors: Arrow functions cannot be used as constructors with the new keyword. Attempting to do so will result in a TypeError.
+- No super and new.target Binding: Arrow functions do not have their own super or new.target bindings.
+- The arguments object is not available in arrow functions.
+
+
+### Guess the Output
+- Here, the argument object is used inside the function.
+
+```javascript
+function fn() {
+    console.log(arguments);
+}
+
+fn(1, 3, 2);
+```
+
+Output:
+```
+[Arguments] { '0': 1, '1': 3, '2': 2 }
+```
+
+Explanation:
+- In JavaScript, the arguments object is an array-like object that contains all the arguments passed to a function. It is available inside all functions, regardless of whether the function explicitly declares parameters.
+
+
+
+
 
 
 
