@@ -430,3 +430,128 @@ Hi Razi
     console.log(num1 + num2);
 })(5, 2)
 ```
+### Questions of IIFE
+- Due to closer, in the following code, the inner function can access the properties of its parent function.
+
+```javascript
+(function (x) {
+    return (function (y) {
+        console.log(x)
+    })(2)
+})(1)
+```
+Output:
+```
+1
+```
+
+### Questions on functions Example 1
+- In each iteration of the loop, a new binding for i is created due to let.
+- Each setTimeout function captures the correct value of i at the time it was created.
+- When the setTimeout functions execute, they log the values of i from 0 to 4, which were captured during their respective iterations.
+
+```javascript
+for(let i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log(i)
+    }, i * 1000)
+}
+```
+Output:
+```
+0
+1
+2
+3
+4
+```
+### Questions on functions Example 2
+- There's only one variable i for the entire loop, shared across all iterations due to var.
+- After the loop finishes executing, the value of i is 5.
+- When the setTimeout functions execute, they all access the same variable i, which has the final value 5.
+- Therefore, all the setTimeout functions log the value 5.
+
+```javascript
+for(var i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log(i)
+    }, i * 1000)
+}
+```
+Output:
+```
+5
+5
+5
+5
+5
+```
+
+### Reason for different outputs for the above code example
+- In JavaScript, var and let have different scoping behaviors, which leads to the difference in output between the two code snippets.
+
+### To get the desired output using 'var'
+-  Use an IIFE to create a new scope for i within each iteration.
+
+```javascript
+for(var i = 0; i < 5; i++) {
+    (function (i) {
+        setTimeout(function () {
+            console.log(i)
+        }, i * 1000)
+    })(i);
+}
+```
+
+Output
+```
+0
+1
+2
+3
+4
+```
+
+### Hoisting
+-  In javaScript, due to hoisting, variable declarations are moved to the top of their scope during the compilation phase.
+- variables including function expressions (arrow function) are assigned a spceial value "undefined".
+- But the complete functions are copied and hoisted in the global scope.
+
+```javascript
+//variable declaration before function call
+var firstName = "Rahul"
+
+//function call before its definition
+sayHi(firstName, lastName)
+
+//function definition 
+function sayHi(firstName, lastName) {
+    console.log("Hi " + firstName + " " + lastName)
+}
+
+//variable declaration after function call
+var lastName = "Singh"
+```
+
+Output
+```
+Hi Rahul undefined
+```
+
+### Question of hoisting
+
+```javascript
+var x = 21
+
+var myFunc = function () {
+    console.log(x)
+    var x = 20
+}
+
+myFunc()
+```
+
+Output
+```
+undefined
+```
