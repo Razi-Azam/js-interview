@@ -13,6 +13,8 @@
 
 [5. Functions - Hoisting, Scope, Callback, Arrow Functions](#functions---hoisting-scope-callback-arrow-functions)
 
+[6. Spread vs rest Operator](#spread-vs-rest-operators)
+
 ---
 ## var let  const
 [Go to Top](#topics)
@@ -538,7 +540,12 @@ Output
 Hi Rahul undefined
 ```
 
-### Question of hoisting
+### Question on hoisting
+Code explanation:
+- Inside myFunc, the statement var x = 20; creates a new variable x within the function scope. This variable declaration "shadows" the outer variable x, meaning that references to x within myFunc will refer to the inner x variable.
+- However, since JavaScript has hoisting, the inner x variable is hoisted to the top of the function scope, effectively making it exist throughout the entire function.
+- When console.log(x); is executed inside myFunc, it refers to the inner x variable. At this point, x exists but hasn't been assigned a value yet due to hoisting, so it logs undefined.
+- Finally, the var x = 20; line assigns the value 20 to the inner x variable.
 
 ```javascript
 var x = 21
@@ -555,3 +562,59 @@ Output
 ```
 undefined
 ```
+
+
+
+
+--- 
+
+## Spread vs Rest Operators
+[Go to Top](#topics)
+
+- The spread and rest operators are both introduced in ECMAScript 6 (ES6) and are denoted by the same syntax: three consecutive dots (...). However, they are used in different contexts and have different behaviors in JavaScript.
+
+### Spread Operator (...):
+- The spread operator is used to expand an iterable (like an array or a string) into individual elements.
+- It's primarily used in function calls and array literals.
+- When used in function calls, it allows an iterable to be expanded into individual arguments.
+- When used in array literals, it allows an array to be expanded into another array or into function arguments.
+
+Example usage in function calls:
+```javascript
+const numbers = [1, 2, 3];
+console.log(...numbers); // Logs: 1 2 3
+```
+
+Example usage in array literals:
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];
+console.log(arr2); // Logs: [1, 2, 3, 4, 5]
+```
+
+### Rest Parameter (...):
+- The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
+- It's used in function declarations to capture all remaining arguments into a single array parameter.
+- It must be the last parameter in the parameter list.
+
+Example usage in function declarations:
+```javascript
+function sum(...numbers) {
+    return numbers.reduce((acc, curr) => acc + curr, 0);
+}
+console.log(sum(1, 2, 3)); // Logs: 6
+```
+
+An Example where both spread and rest operators are used
+```javascript
+//rest operator is used to capture all the values of numArr
+function multiply(...nums) {
+    console.log(nums[0] * nums[1])
+}
+
+var numArr = [4, 3]
+
+//here, speard operator is used to spread the numArr values
+multiply(...numArr)
+```
+

@@ -40,33 +40,28 @@
 // }
 
 
-
 /* ====================================================
     Questions on Hoisting
 ======================================================*/
+// var x = 21
 
-//variable declaration before function call
-var firstName = "Rahul"
+// var myFunc = function () {
+//     console.log(x)
+//     var x = 20
+// }
 
-//function call before its definition
-sayHi(firstName, lastName)
-
-//function definition 
-function sayHi(firstName, lastName) {
-    console.log("Hi " + firstName + " " + lastName)
-}
-
-//variable declaration after function call
-var lastName = "Singh"
+// myFunc()
 
 /* ====================================================
-    Questions on Hoisting
+    Spread vs rest operator
 ======================================================*/
-var x = 21
 
-var myFunc = function () {
-    console.log(x)
-    var x = 20
+//rest operator is used to capture all the values of numArr
+function multiply(...nums) {
+    console.log(nums[0] * nums[1])
 }
 
-myFunc()
+var numArr = [4, 3]
+
+//here, speard operator is used to spread the numArr values
+multiply(...numArr)
