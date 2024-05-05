@@ -745,7 +745,24 @@ npm i --save-dev jest
 ```
 
 - Export the file.js which is to be tested.
+
+```javascript
+//brute Force approach
+function findLargestElement(arr) {
+    let largest = -Infinity
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i] > largest) {
+            largest = arr[i]
+        }
+    }
+    return largest
+}
+
+module.exports = findLargestElement
+```
+
 - Create a test file using Filename.test.js.
+- Import the file that is to be tested.
 - Create a test suite using "test()".
 
 ```javascript
@@ -770,6 +787,7 @@ Output:
 
 - To view the test wit complete coverage.
 - Add "--coverage" in package.json.
+- It also generate an HTML file (index.html) that can be viewed in the browser.
 ```javascript
   "scripts": {
     "test": "jest --coverage"

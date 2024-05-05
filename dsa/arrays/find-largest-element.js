@@ -1,5 +1,20 @@
+/*
+brute Force approach
+Method 2 | Sorted Array
+Time Complexity: O(n log  n)  | Space Complexity: O(n)
+here, the sort() method uses either mergeSort or quicksort depending upon the JS engine. 
+And the Time Complexity of sort() method is O(n log n)
+*/
+function findLargestElement1(arr) {
+    let sortedArr = arr.sort((a, b) => a - b)
+    console.log(sortedArr)
+    return sortedArr[arr.length - 1]
+}
+
 //brute Force approach
-function findLargestElement(arr) {
+//Method 1 | Using a for loop
+//Time Complexity: O(n) | Space Complexity: O(1)
+function findLargestElement2(arr) {
     let largest = -Infinity
     for(let i = 1; i < arr.length; i++) {
         if(arr[i] > largest) {
@@ -9,8 +24,7 @@ function findLargestElement(arr) {
     return largest
 }
 
-// let numArr = [2,10,3,0,17,1]
 
-// console.log("largest Element in the array is " + findLargestElement(numArr))
+module.exports = findLargestElement1
+module.exports = findLargestElement2
 
-module.exports = findLargestElement
