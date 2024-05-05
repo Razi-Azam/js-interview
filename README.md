@@ -15,6 +15,8 @@
 
 [6. Spread vs rest Operator](#spread-vs-rest-operators)
 
+[7. Unit test using Jest](#unit-test-using-jest)
+
 ---
 ## var let  const
 [Go to Top](#topics)
@@ -714,3 +716,65 @@ var numArr = [4, 3]
 multiply(...numArr)
 ```
 
+---
+
+
+## Unit test using Jest
+[Go to Top](#topics)
+
+### Jest Configuration
+- First, install the JSON package.
+- The -y flag (short for yes) is used to automatically answer “yes” to any prompts that npm might print on the command line.
+
+```javascript
+npm init -y
+```
+
+- Install Jest.
+
+```javascript
+npm i --save-dev jest
+```
+
+- In the package.json file, enter "jest" as the to run the test.
+
+```javascript
+  "scripts": {
+    "test": "jest"
+  }
+```
+
+- Export the file.js which is to be tested.
+- Create a test file using Filename.test.js.
+- Create a test suite using "test()".
+
+```javascript
+const findLargestElement = require('../../find-largest-element')
+
+test('largest element in an array', () => {
+    const myArr = [2,10,3,0,17,1]
+    expect(findLargestElement(myArr)).toBe(17) //checks the reference as well 
+    expect(findLargestElement(myArr)).toEqual(17) //compares only the values, good to test clone array
+    expect(findLargestElement(myArr)).not.toBe(10)
+})
+```
+
+- Run the test as follows:
+
+```javascript
+npm test
+```
+
+Output:
+![alt text](image.png)
+
+- To view the test wit complete coverage.
+- Add "--coverage" in package.json.
+```javascript
+  "scripts": {
+    "test": "jest --coverage"
+  },
+```
+
+Output:
+![alt text](image-1.png)

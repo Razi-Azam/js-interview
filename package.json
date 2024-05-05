@@ -1,0 +1,15 @@
+{
+  "name": "js-interview",
+  "version": "1.0.0",
+  "description": "---\r ## Topics\r [1. var, Let, and const](#var-let-const)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0" 
+  }
+}
