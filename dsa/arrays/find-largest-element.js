@@ -11,7 +11,7 @@ function findLargestElement1(arr) {
     return sortedArr[arr.length - 1]
 }
 
-//brute Force approach
+
 //Method 1 | Using a for loop
 //Time Complexity: O(n) | Space Complexity: O(1)
 function findLargestElement2(arr) {
@@ -24,7 +24,15 @@ function findLargestElement2(arr) {
     return largest
 }
 
+/*
+Big O Time complexity chart: best to worst:
+Constant: O(1) > Linear time: O(n) > Logarithmic time: O(n log n) > Quadratic time: O(n^2) > Exponential time: O(2^n) > Factorial time: O(n!)
+O(1) - Excellent/Best
+O(log n) - Good
+O(n) - Fair
+O(n log n) - Bad
+O(n^2), O(2^n) and O(n!) - Horrible/Worst
+*/
 
 module.exports = findLargestElement1
 module.exports = findLargestElement2
-

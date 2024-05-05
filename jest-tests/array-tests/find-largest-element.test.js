@@ -1,5 +1,5 @@
-const findLargestElement1 = require('../../find-largest-element')
-const findLargestElement2 = require('../../find-largest-element')
+const findLargestElement1 = require('../../dsa/arrays/find-largest-element')
+const findLargestElement2 = require('../../dsa/arrays/find-largest-element')
 
 test('largest element in an array findLargestElement1', () => {
     const myArr = [2,10,3,0,17,1]
