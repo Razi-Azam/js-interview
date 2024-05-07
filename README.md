@@ -17,6 +17,9 @@
 
 [7. Unit test using Jest](#unit-test-using-jest)
 
+[8. Seal vs Freeze vs preventExtensions](#seal-vs-freeze-vs-preventextensions)
+
+
 ---
 ## var let  const
 [Go to Top](#topics)
@@ -796,3 +799,33 @@ Output:
 
 Output:
 ![alt text](image-1.png)
+
+
+---
+
+## Seal vs Freeze vs preventExtensions
+[Go to Top](#topics)
+
+### Object.Seal()
+- Editable.
+- Cannot delete or add.
+
+### Object.freeze()
+- Editable.
+- Can delete.
+- Cannot add.
+
+### Object.freeze()
+- Non-Editable
+- Cannot do anything.
+
+## Comparison Table
+
+| Method                | Deletion? | Updation? | Addition? |
+|-----------------------|-----------|-----------|-----------|
+| `Object.seal()`      |    ❌      |    ✔️     |    ❌     |
+| `Object.freeze()`    |    ❌      |    ❌     |    ❌     |
+| `Object.preventExtensions()` |    ❌      |    ✔️     |    ✔️     |
+
+
+
