@@ -810,7 +810,7 @@ Output:
 - Editable.
 - Cannot delete or add.
 
-### Object.freeze()
+### Object.preventExtensions()
 - Editable.
 - Can delete.
 - Cannot add.
@@ -819,13 +819,14 @@ Output:
 - Non-Editable
 - Cannot do anything.
 
-## Comparison Table
+### Comparison Table
 
 | Method                | Deletion? | Updation? | Addition? |
 |-----------------------|-----------|-----------|-----------|
 | `Object.seal()`      |    ❌      |    ✔️     |    ❌     |
 | `Object.freeze()`    |    ❌      |    ❌     |    ❌     |
-| `Object.preventExtensions()` |    ❌      |    ✔️     |    ✔️     |
+| `Object.preventExtensions()` |    ✔️     |    ✔️     |    ❌     |
 
 
 
+#### 📝 Note: Code for the above is added in the seal-freeze-preventex.js under the js-concepts folder
