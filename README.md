@@ -242,12 +242,12 @@ Array.prototype.myFilter = function(callBackFunc) {
 ```javaScript
 let myArr =  [4, 17, 18, 13]
 
-let addOne = myArr.myFilter(num => {
+let divisibleByTwo = myArr.myFilter(num => {
     return num % 2 === 0
 })
 
 console.log('Polyfill of Map')
-console.log(addOne)
+console.log(divisibleByTwo)
 ```
 
 Output
