@@ -779,7 +779,7 @@ test('largest element in an array', () => {
 })
 ```
 
-- Run the test as follows:
+- Run the test using the following command:
 
 ```javascript
 npm test
