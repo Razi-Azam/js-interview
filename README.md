@@ -862,3 +862,11 @@ Output:
 //no  of days = m 
 //no. of products = n
 
+## Closure
+[Go to Top](#topics)
+- A closure in JavaScript is a function that retains access to its outer lexical scope, even when the function is executed outside that scope.
+
+### Usage:
+- Data Privacy: Closures can be used to create private variables and methods.
+- Function Factories: Creating functions with pre-configured parameters.
+- Event Handlers and Callbacks: Maintaining state between function calls.
