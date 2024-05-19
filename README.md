@@ -19,6 +19,8 @@
 
 [8. Seal vs Freeze vs preventExtensions](#seal-vs-freeze-vs-preventextensions)
 
+[9. Closure](#closure)
+
 
 ---
 ## var let  const
@@ -779,7 +781,7 @@ test('largest element in an array', () => {
 })
 ```
 
-- Run the test as follows:
+- Run the test using the following command:
 
 ```javascript
 npm test
@@ -832,12 +834,31 @@ Output:
 #### 📝 Note: Code for the above is added in the seal-freeze-preventex.js under the js-concepts folder
 
 
-## Closure
-[Go to Top](#topics)
-- A closure in JavaScript is a function that retains access to its outer lexical scope, even when the function is executed outside that scope.
+### Problem statement : 
+Amit is a salesman who wishes to know the maximum revenue received from a given item of the N products each day . 
+Amit has a sales record of N products for M days.
+Help amit to find the highest revenue received each day.
 
-### Usage:
-- Data Privacy: Closures can be used to create private variables and methods.
-- Function Factories: Creating functions with pre-configured parameters.
-- Event Handlers and Callbacks: Maintaining state between function calls.
+### Input : 
+,,,
+The first line of the input consists of two space-separated integers- day(M) and item(N) representing the days and the products in the sales record.
+
+The next M lines consist of N space separated integers representing the sales revenue from each product each day.
+'''
+
+### Output: 
+Print m space-separated integers representing the maximum revenue received each day .
+
+Example Input:
+3 4
+101 123 234 344
+143  282 499 493
+283 493 202 304
+
+Output:
+344 499 493
+*/
+
+//no  of days = m 
+//no. of products = n
 
