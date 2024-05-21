@@ -870,3 +870,30 @@ Output:
 - Data Privacy: Closures can be used to create private variables and methods.
 - Function Factories: Creating functions with pre-configured parameters.
 - Event Handlers and Callbacks: Maintaining state between function calls.
+
+
+### Question: Remove duplicate from an array.
+
+```javaScript
+
+I don't really understand precisely what inbuild functions are or to what extent is a function inbuilt, so I'm assuming I'm not allowed to use indexOf, hasOwnProperty, Array.prototype.push, ...
+
+const input = [1, 2, 3, 3, 4, 5,2, 6,3,6,1];
+
+function removeDuplicate(arr) {
+    const result = [];
+    let idx = 0;
+    const tmp = {};
+
+    for (let i = 0; i < arr.length; i++) {
+        if (!tmp[arr[i]]) {
+            tmp[arr[i]] = 1;
+            result[idx] = arr[i];
+            idx++;
+        } 
+    }
+    return result;
+}
+
+console.log(removeDuplicate(input));
+```
