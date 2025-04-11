@@ -21,6 +21,8 @@
 
 [9. Closure](#closure)
 
+[10. Callback Function and the issues](#callback-function-and-issues)
+
 
 ---
 ## var let  const
@@ -864,6 +866,7 @@ Output:
 
 ## Closure
 [Go to Top](#topics)
+
 - A closure in JavaScript is a function that retains access to its outer lexical scope, even when the function is executed outside that scope.
 
 ### Usage:
@@ -897,3 +900,88 @@ function removeDuplicate(arr) {
 
 console.log(removeDuplicate(input));
 ```
+
+[Go to Top](#topics)
+
+## Callback Function and Issues
+
+### ✅ What is a Callback?
+
+A **callback** is a **function passed as an argument to another function**, to be **called later**, usually after an asynchronous task is done.
+
+> 🗣️ "Hey bro, when you're done with this task, call me back!"
+
+---
+
+### 🛠️ Real-Life Analogy
+
+You order food online 🍕:
+
+1. You place an order (main function).
+2. You say, "When food is ready, **call me**."
+3. That **"call me"** is the callback function.
+
+---
+
+## 💻 Simple JS Example
+
+```js
+function greetUser(name, callback) {
+  console.log("Hi " + name);
+  callback();
+}
+
+function sayBye() {
+  console.log("Bye!");
+}
+
+greetUser("Razi", sayBye);
+
+
+Output:
+Hi Razi
+Bye!
+
+```
+
+### Issues with Callback
+
+### 🧱 Callback Hell
+- When multiple callbacks are nested, the code becomes hard to read and debug.
+- This is called Callback Hell or Pyramid of Doom.
+
+For example,
+```javaScript
+api.createOrder(cart, function () {
+  api.proceedToPayment(function () {
+    api.showOrderSummary(function () {
+      api.updateWallet(function () {
+        // Nested further...
+      });
+    });
+  });
+});
+
+```
+
+### ❗ Inversion of Control
+- You give control of when/how your callback is executed to someone else.
+- If the external function misbehaves (calls it multiple times or never), your code is at risk.
+
+### ✅ Solution to Callback Hell
+- Use Promises
+- Use async/await for better syntax and readability
+
+## 🔚 Summary
+
+| 🧩 Concept             | 📝 Explanation                                         |
+|------------------------|--------------------------------------------------------|
+| Synchronous JS         | Executes one task at a time                            |
+| Asynchronous Ops       | Handled via callbacks (e.g., `setTimeout`)             |
+| Callback               | Function passed to another function to be run later    |
+| Callback Hell          | Deeply nested callbacks, hard to manage                |
+| Inversion of Control   | Loss of control over when/how callback is executed     |
+| Solution               | Use Promises or async/await for better code structure  |
+
+
+[Go to Top](#topics)
