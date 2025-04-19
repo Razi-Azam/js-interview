@@ -19,7 +19,22 @@
 
 [8. Seal vs Freeze vs preventExtensions](#seal-vs-freeze-vs-preventextensions)
 
+
+
 [9. Closure](#closure)
+
+ 1. [Question 1: Closure and Shadowing](#question-1-closure-and-shadowing)
+ 2. [Question 2: Output Based](#question-2-output-based)
+ 3. [Question 3: Time Optimization using closure](#question-3-time-optimization-using-closure)
+ 4. [Question 4: setTimeout output](#question-4-settimeout-output)
+ 5. [Question 5: Private counter using closure](#question-5-use-a-closure-to-create-a-private-counter)
+ 6. [Question 6: Module pattern](#question-6-module-pattern)
+ 7. [Question 7: Run only once](#question-7-run-only-once)
+ 8. [Question 8: Once Polyfills](#question-8-once-polyfills)
+ 9. [Question 9: Memoize Polyfills](#question-9-memoize-polyfill)
+10. [Question 10. Closure vs Scope](#question-10-closure-vs-scope)
+
+
 
 [10. Callback Function and the issues](#callback-function-and-issues)
 
@@ -864,22 +879,507 @@ Output:
 //no  of days = m 
 //no. of products = n
 
+## Lexical Scope
+- Lexical Scope:  a function can access variables defined in its outer (parent) scope, where it was physically 
+written in the code, not where it’s called from.
+
+```javaScript
+
+let name = "Ali";
+
+function greet() {
+  console.log("Hello " + name); // 'name' is accessible here
+}
+
+greet(); // Output: Hello Ali
+
+```
+
+> NOTE: greet() is written in the same scope where name exists.
+
 ## Closure
 [Go to Top](#topics)
 
 - A closure in JavaScript is a function that retains access to its outer lexical scope, even when the function is executed outside that scope.
+- In other words, A closure in JavaScript is created when a function remembers and has access to variables from its outer scope, even after that outer function has finished executing.
 
 ### Usage:
 - Data Privacy: Closures can be used to create private variables and methods.
 - Function Factories: Creating functions with pre-configured parameters.
 - Event Handlers and Callbacks: Maintaining state between function calls.
 
+### Every closure has 3 scopes:
+- Local Scope
+- Outer Functions Scope
+- Global Scope
 
-### Question: Remove duplicate from an array.
+```javaScript
+//global scope
+let introText = "How may I help you?"
+
+function welcomeUser(userName) {
+    var greetText = "Welcome"
+    var greetLine = " ------------ "
+    //outer function scope
+    return function greetUser() {
+        //local scope
+        console.log(greetLine + greetText + " " + userName + greetLine);
+        console.log(introText)
+    };
+}
+
+const greet = welcomeUser('Razi');
+greet();
+/* Output:
+------------ Welcome Razi ------------ 
+How may I help you?
+
+*/
+
+```
+
+### Question: 1 Closure and Shadowing
+
+[Go to Top](#topics)
+
+```javaScript
+let count = 0;
+(function printCount() {
+    if(count === 0) {
+        let count = 1; //shadowing: this var will shadow out var "count"
+        console.log(count);
+    }
+    console.log(count)
+})();
+
+/* OUTPUT
+1
+0
+*/
+```
+
+### Question 2: Output based
+
+[Go to Top](#topics)
+
+```javaScript
+//Question 2
+//Write the following function 
+
+var addFive = createBase(5)
+addFive(20) //output: 25
+addFive(23) //output 28
+
+function createBase(addNumber) {
+    
+    function add(number) {
+        console.log(number + addNumber)
+    }
+    return add
+}
+
+```
+
+### Question 3: Time Optimization using closure
+
+[Go to Top](#topics)
+
+```javaScript
+//Optimzed this function
+function find(index) {
+    let numArr = []
+
+    for(let i = 0; i < 100000; i++) {
+        numArr[i] = i * i
+    }
+
+    return numArr[index]
+}
+
+console.log("------without optimzation-------")
+console.time("20")
+console.log(find(20))
+console.timeEnd("20")
+
+//Optimzed function
+function optimizedFind() {
+    let numArr = []
+
+    for(let i = 0; i < 100000; i++) {
+        numArr[i] = i * i
+    }
+
+    return function (index) {
+        return numArr[index]
+    }
+}
+
+console.log("------Optimized Function using closure------")
+let closure = optimizedFind()
+console.time("20")
+console.log(closure(20))
+console.timeEnd("20")
+
+/* OUTPUT
+Time Difference
+------without optimzation-------
+400
+20: 5.823ms
+-----Optimized Function using closure------
+400
+20: 0.371ms
+
+```
+
+### Question 4: setTimeout Output
+
+[Go to Top](#topics)
+
+```javaScript
+//The following function print 5 five times each second
+//The function should print 0 to 4 each second
+
+console.log("Question: 4 - SetTimeout Output")
+//code:1 
+function timeFunc() {
+    for (var i = 0; i < 5; i++) {
+        setTimeout(function printVal() {
+            console.log(i)
+        }, i * 1000)
+    }
+}   
+
+timeFunc()
+
+/* OUTPUT
+5
+5
+5
+5
+5
+*/
+
+//code: 2
+function timeFunc2() {
+    for (let i = 0; i < 5; i++) {
+        setTimeout(function printVal() {
+            console.log(i)
+        }, i * 1000)
+    }
+} 
+
+//delay this function to 5 sec because I want
+//the output of the first function first
+setTimeout(() => {
+    timeFunc2()
+}, 5000);
+
+/* OUTPUT
+0
+1
+2
+3
+4
+*/
+
+```
+
+##### Reason of different output: 
+> ➡️ Code 1 (var):
+var is function-scoped, so all setTimeout callbacks share the same i which becomes 5 after the loop, resulting in output: 5, 5, 5, 5, 5 (1 per second).
+
+> ➡️ Code 2 (let):
+let is block-scoped, so each iteration gets a new i preserved in its own scope, resulting in output: 0, 1, 2, 3, 4 (1 per second).
+
+#### Follow up question: print 0 to 4 without using "let"
+
+
+
+```javaScript
+/* An IIFE is used which creates a new scope 
+for each loop iteration, capturing the current value 
+of i as j, and the inner setTimeout function forms 
+a closure over j, preserving its value at 
+the time of execution. */
+
+function timeFunc3() {
+    for (var i = 0; i < 5; i++) {
+        (function closureFunc(j){
+            setTimeout(function printVal() {
+                console.log(j)
+            }, j * 1000)
+        })(i)
+    }
+}
+
+timeFunc3()
+```
+
+### Question 5: Use a closure to create a private counter.
+
+[Go to Top](#topics)
 
 ```javaScript
 
-I don't really understand precisely what inbuild functions are or to what extent is a function inbuilt, so I'm assuming I'm not allowed to use indexOf, hasOwnProperty, Array.prototype.push, ...
+function counter() {
+    var _counter = 0; //as per naming convention, a private counter should be created using underscore
+
+    //to make increment
+    function add(incrementVakue) {
+        //here, we are not directly manipulating the 
+        // private counter
+        _counter += incrementVakue
+    }
+
+    //to show the value
+    function showCounter() {
+        console.log("Counter = " + _counter)
+    }
+
+    //return both the functions
+    return {
+        add,
+        showCounter,
+    };
+}
+
+//call the function
+const counterClosure = counter();
+
+//call each functiosn oen by one
+counterClosure.add(13)
+counterClosure.add(2)
+
+counterClosure.showCounter()
+
+/* OUTPUT
+Counter = 15
+*/
+```
+
+### Question 6: Module Pattern
+
+[Go to Top](#topics)
+
+> The Module Pattern is a way to encapsulate (hide) data and expose only what you want using closures and IIFEs.
+
+It helps to:
+- Keep variables private (not polluting global scope)
+- Expose only public methods/properties
+
+```javaScript
+const counterModule = (function() {
+    // Private variable
+    let count = 0;
+
+    // Private function
+    function changeBy(val) {
+        count += val;
+    }
+
+    // Publicly exposed methods
+    return {
+        increment: function() {
+            changeBy(1);
+            console.log(count);
+        },
+        decrement: function() {
+            changeBy(-1);
+            console.log(count);
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+})();
+
+// Using the module
+counterModule.increment(); // Output: 1
+counterModule.increment(); // Output: 2
+counterModule.decrement(); // Output: 1
+console.log(counterModule.getCount()); // Output: 1
+
+```
+> The Module Pattern uses an immediately invoked function expression (IIFE) to create a private scope.
+
+### Question 7: Run only once
+
+[Go to Top](#topics)
+
+```javaScript
+//Make the function runs only once
+let channelName
+function subscribe() {
+    channelName = "Mehfil E Razi"
+    console.log("Subscribe to", channelName)
+}
+
+subscribe()
+subscribe()
+subscribe()
+subscribe()
+subscribe()
+
+/*OUTPUT
+Subscribe to Mehfil E Razi
+Subscribe to Mehfil E Razi
+Subscribe to Mehfil E Razi
+Subscribe to Mehfil E Razi
+Subscribe to Mehfil E Razi
+*/
+
+//Correct code
+let channelName
+function subscribe() {
+    let funcCall = 0;
+
+    return function() {
+        if(funcCall > 0) {
+            console.log("Already Susbcribed. Thank you!")
+        } else {
+            channelName = "Mehfil E Razi"
+            console.log("Subscribe to ", channelName)
+            funcCall++
+        }
+    }
+}
+
+let subscribeTheChannel = subscribe()
+subscribeTheChannel()
+subscribeTheChannel()
+subscribeTheChannel()
+subscribeTheChannel()
+
+/* OUTPUT
+Subscribe to  Mehfil E Razi
+Already Susbcribed. Thank you!
+Already Susbcribed. Thank you!
+Already Susbcribed. Thank you!
+*/
+
+```
+
+### Question 8: Once Polyfills
+
+[Go to Top](#topics)
+
+```javaScript
+console.log("Question: 8 - Once Polyfill")
+
+function once(func, context) {
+    let ran;
+
+    return function() {
+        if(func) {
+            ran = func.apply(context || this, arguments)
+            func = null
+        }
+        return ran;
+    }
+}
+
+//make any function run once
+const greetOnce = once((userName) => console.log("Welcome ", userName))
+
+greetOnce("Razi")
+greetOnce("Razi")
+greetOnce("Razi")
+greetOnce("Razi")
+
+/* OUTPUT
+Welcome  Razi
+*/
+
+```
+
+### Question 9: Memoize Polyfill
+
+[Go to Top](#topics)
+
+```javaScript
+//memoize polyfills
+function memoizeMe(func, context) {
+    //an object to cache calculated values
+    const resCache = {}
+
+    return function(...args) {
+        var argsCache = JSON.stringify(args);
+        if(!resCache[argsCache]) {
+            resCache[argsCache] = func.call(context || this, ...args)
+        }
+         return resCache[argsCache]
+    }
+}
+
+//function to give square
+const findSquare = (num1) => {
+    //let there are some heavy calculation
+    for(let i = 1; i <= 10000000; i++) {}
+
+    return num1 * num1
+}
+
+//call the function without memoization
+console.log("Without Memoization")
+console.time("Call 1st");
+console.log(findSquare(9999))
+console.timeEnd("Call 1st");
+
+console.time("Call 2nd");
+console.log(findSquare(9999))
+console.timeEnd("Call 2nd");
+
+//memoize the findSquare function
+const memoizedFindSquare = memoizeMe(findSquare);
+
+//calling memoized function
+console.log("----Memoized Function-----")
+console.time("First Call");
+console.log(memoizedFindSquare(9999))
+console.timeEnd("First Call");
+
+
+console.time("Second Call");
+console.log(memoizedFindSquare(9999))
+console.timeEnd("Second Call");
+
+
+/* OUTPUT
+Without Memoization
+99980001
+Call 1st: 9.655ms
+99980001
+Call 2nd: 8.433ms
+
+----Memoized Function-----
+99980001
+First Call: 3.272ms
+99980001
+Second Call: 0.16ms
+*/
+
+```
+
+### Question 10: Closure vs Scope
+
+[Go to Top](#topics)
+
+Closure:
+> Whenever a function is defined inside another function and it accesses variables from the outer function, it forms a closure.
+
+Scope: 
+> Scope defines where a variable can be accessed in our code (global, function/local, or block scope).
+
+
+
+
+### Question: Remove duplicate from an array.
+
+[Go to Top](#topics)
+
+```javaScript
+
+// without using built-in indexOf, hasOwnProperty, Array.prototype.push, ...
 
 const input = [1, 2, 3, 3, 4, 5,2, 6,3,6,1];
 
@@ -982,6 +1482,18 @@ api.createOrder(cart, function () {
 | Callback Hell          | Deeply nested callbacks, hard to manage                |
 | Inversion of Control   | Loss of control over when/how callback is executed     |
 | Solution               | Use Promises or async/await for better code structure  |
+
+
+[Go to Top](#topics)
+
+
+
+## 
+
+
+
+
+
 
 
 [Go to Top](#topics)
